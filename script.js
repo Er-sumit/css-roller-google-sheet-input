@@ -1,4 +1,5 @@
 const ENTRANTS = [];
+const all_Entrants = [];
 //adding variables for music function
 var audio, playbtn, mutebtn, seek_bar;
 
@@ -29,11 +30,17 @@ function readSheet() {
     for (i = 3; i < json_response.feed.entry.length; i++) {
         console.log(json_response.feed.entry[i]);
         if (i % 2 != 0) {
-            ENTRANTS.push(json_response.feed.entry[i].content.$t);
+            all_Entrants.push(json_response.feed.entry[i].content.$t);
             console.log(json_response.feed.entry[i].content.$t);
         }
     }
     // alert("Page is loaded");
+    // get unique values of all_Entrants into ENTRANTS
+    let unique_data = [...new Set(all_Entrants)];
+    for (const item in unique_data) {
+        ENTRANTS.push(unique_data[item]);
+    }
+    console.log(all_Entrants);
     console.log(ENTRANTS);
 }
 
